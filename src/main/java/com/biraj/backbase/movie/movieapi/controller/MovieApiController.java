@@ -20,15 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "/v1/api")
 public class MovieApiController {
 
-    /**
-     * AccessTokenFactory.
-     */
     @Autowired
     private AccessFactory tokenFactory;
 
-    /**
-     * AuthenticatorService.
-     */
     @Autowired
     AuthenticatorService authenticatorService;
 

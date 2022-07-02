@@ -11,6 +11,6 @@ import java.util.Optional;
  */
 public interface UserRepository extends CrudRepository<Users, Integer> {
 
-	Optional<Users> findByUserid(String userid);
+    Optional<Users> findByUserid(String userid);
 
 }

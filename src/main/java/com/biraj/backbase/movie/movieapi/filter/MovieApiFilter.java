@@ -23,7 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 
  * @author birajmishra
  * Global filter for all requestion , for secuity.
  */
@@ -32,60 +31,53 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MovieApiFilter implements Filter {
 
+    @Autowired
+    private AccessFactory tokenFactory;
 
-	/**
-	 * AccessTokenFactory.
-	 */
-	 @Autowired
-	 private AccessFactory tokenFactory;
-	
-	 
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 
-	}
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
 
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse res = (HttpServletResponse) response;
-		
-		//MDC.put("requestUUID", req.getHeader(MovieConstant.UUID));
-		String accessToken = req.getHeader(MovieConstant.ACCESS_TOKEN);
-		String authorization = req.getHeader(MovieConstant.AUTHORIZATION);
-		Boolean isChainingDisabled = false;
-		ErrorInfo errorInfo;
-		
-		if (authorization != null && !"".equals(authorization.trim())) {
-			isChainingDisabled = false;
-		}else if (accessToken != null && !"".equals(accessToken.trim())) {
-			AccessToken accessTokenObj = null;
-			try {
-				accessTokenObj = tokenFactory.verifyAccessToken(accessToken);
-				req.setAttribute(MovieConstant.ACCESS_TOKEN, accessTokenObj);
-			}catch(Exception e){
-				log.error(e.getMessage(), e);
-				log.error("MovieApiFilter : doFilter : invalid access Token : {} ", accessToken);
-				errorInfo = new ErrorInfo(MovieErrorCodeConstant.ACCESS_TOKEN_INVALID,MovieConstant.RELOGIN);
-				res.setStatus(HttpStatus.UNAUTHORIZED.value()); 
-				res.setContentType("application/json");
-				res.getWriter().write(errorInfo.toString());
-				isChainingDisabled = true;
-			}
-		
-			if (log.isTraceEnabled() && null !=accessTokenObj) {
-				log.trace("MovieApiFilter : doFilter : accessTokenObj : " + accessTokenObj);
-			}
-		}
-		
-		if(!isChainingDisabled){
-			chain.doFilter(req, res);		
-		}
-	}
+        //MDC.put("requestUUID", req.getHeader(MovieConstant.UUID));
+        String accessToken = req.getHeader(MovieConstant.ACCESS_TOKEN);
+        String authorization = req.getHeader(MovieConstant.AUTHORIZATION);
+        Boolean isChainingDisabled = false;
+        ErrorInfo errorInfo;
 
-	@Override
-	public void destroy() {
+        if (authorization != null && !"".equals(authorization.trim())) {
+            isChainingDisabled = false;
+        } else if (accessToken != null && !"".equals(accessToken.trim())) {
+            AccessToken accessTokenObj = null;
+            try {
+                accessTokenObj = tokenFactory.verifyAccessToken(accessToken);
+                req.setAttribute(MovieConstant.ACCESS_TOKEN, accessTokenObj);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+                log.error("MovieApiFilter : doFilter : invalid access Token : {} ", accessToken);
+                errorInfo = new ErrorInfo(MovieErrorCodeConstant.ACCESS_TOKEN_INVALID, MovieConstant.RELOGIN);
+                res.setStatus(HttpStatus.UNAUTHORIZED.value());
+                res.setContentType("application/json");
+                res.getWriter().write(errorInfo.toString());
+                isChainingDisabled = true;
+            }
 
-	}
+            if (log.isTraceEnabled() && null != accessTokenObj) {
+                log.trace("MovieApiFilter : doFilter : accessTokenObj : " + accessTokenObj);
+            }
+        }
+
+        if (!isChainingDisabled) {
+            chain.doFilter(req, res);
+        }
+    }
+
+    @Override
+    public void destroy() {
+    }
 
 }

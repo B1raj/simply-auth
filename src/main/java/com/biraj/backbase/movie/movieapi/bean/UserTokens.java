@@ -3,6 +3,7 @@
  */
 package com.biraj.backbase.movie.movieapi.bean;
 
+import lombok.Data;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -12,30 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("prototype")
+@Data
 public class UserTokens {
-
 	private String accessToken;
-
-
-	/**
-	 * @return the accessToken
-	 */
-	public String getAccessToken() {
-		return accessToken;
-	}
-
-	/**
-	 * @param accessToken
-	 *            the accessToken to set
-	 */
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
-
-
-	@Override
-	public String toString() {
-		return "UserTokens [accessToken=" + accessToken + "]";
-	}
-
 }

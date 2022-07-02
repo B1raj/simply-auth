@@ -27,7 +27,6 @@ public class JwtTokenService {
 	@Value("${accesstoken.algorithm}")
 	private String algorithm;
 
-
 	public AccessToken verifyAccessToken(String token, String secret) throws AccessTokenException {
 		AccessToken accessToken = new AccessToken();
 		try {

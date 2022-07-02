@@ -20,8 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 @Builder
 public class AuthenticatorResponse  {
 
-	private static final long serialVersionUID = 1L;
-
 	private boolean authenticated;
 	private UserInfo userInfo;
 }

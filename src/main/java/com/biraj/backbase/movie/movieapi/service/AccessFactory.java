@@ -22,7 +22,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class AccessFactory {
-
 	@Autowired
 	private JwtTokenService tokenUtil;
 
@@ -37,7 +36,6 @@ public class AccessFactory {
 
 	@Value("${jwt.secret}")
 	private String secret;
-
 
 	public UserTokens createToken(UserInfo userInfo) {
 		UserTokens response = new UserTokens();

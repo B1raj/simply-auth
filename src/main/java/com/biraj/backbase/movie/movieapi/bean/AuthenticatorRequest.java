@@ -22,9 +22,5 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @Scope(scopeName="prototype")
 public class AuthenticatorRequest {
-
-
 	private Map<String, String> userCredentials;
-
-	
 }

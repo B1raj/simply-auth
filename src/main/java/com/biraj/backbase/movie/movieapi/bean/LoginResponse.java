@@ -18,9 +18,5 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @Builder
 public class LoginResponse {
-																		
-
 	private String accessToken;
-
-
 	}

@@ -36,8 +36,7 @@ public class AuthenticatorService {
 		if (authParts.length != 2) {
 			throw new BadRequestException(MovieErrorCodeConstant.BAD_REQUEST, MovieConstant.BAD_REQUEST);
 		}
-		String authInfo = authParts[1];
-		String decodedAuth = CrypticUtil.decrypt(authInfo);
+		String decodedAuth = CrypticUtil.decrypt(authParts[1]);
 		AuthenticatorResponse response;
 
 		String userid = decodedAuth.split(":")[0];

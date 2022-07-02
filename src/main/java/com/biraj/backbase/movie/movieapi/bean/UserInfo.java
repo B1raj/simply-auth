@@ -16,9 +16,5 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @Builder
 public class UserInfo {
-	
-
-
 	private String username;
-
 }
