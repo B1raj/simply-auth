@@ -19,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @Builder
 public class AuthenticatorResponse  {
-
 	private boolean authenticated;
 	private UserInfo userInfo;
 }

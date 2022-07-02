@@ -21,14 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @Builder
 public class ErrorInfo {
-
-	
-	@JsonIgnore
-	private static final long serialVersionUID = 1L;
-
 	private String errorCode;
 	private String errorMessage;
-
-
-	
 }

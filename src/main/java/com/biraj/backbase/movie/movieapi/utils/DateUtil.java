@@ -12,10 +12,8 @@ public class DateUtil {
 		return new Date();
 	}
 
-
 	public static Timestamp getTimestamp() {
-		Timestamp current = Timestamp.from(Instant.now());
-		return current;
+		return Timestamp.from(Instant.now());
 	}
 
 }

@@ -15,7 +15,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccessTokenPayload {
-
 	private String issuer;
 	private Date issuedDate;
 	private String audience;

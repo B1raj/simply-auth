@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  * @author birajmishra
  * Access token class defining structure of token, which secures API's
  */
-@Component
 @Slf4j
 @Data
 @AllArgsConstructor

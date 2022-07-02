@@ -19,19 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RequestMapping(value = "/v1/api")
 public class MovieApiController {
-
     @Autowired
     private AccessFactory tokenFactory;
-
     @Autowired
     AuthenticatorService authenticatorService;
-
-
     @PostMapping(value = "/login")
     private ResponseEntity<LoginResponse> login(HttpServletRequest request,
                                                 @RequestHeader(value = MovieConstant.UUID) String uuid,
-                                                @RequestHeader(value = MovieConstant.AUTHORIZATION) String authorization)
-            throws AuthenticationException {
+                                                @RequestHeader(value = MovieConstant.AUTHORIZATION) String authorization) {
 
         // 1. verify credentials
         AuthenticatorResponse response = authenticatorService.authenticate(authorization);

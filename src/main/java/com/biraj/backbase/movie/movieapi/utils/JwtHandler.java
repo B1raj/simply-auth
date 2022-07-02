@@ -2,6 +2,7 @@ package com.biraj.backbase.movie.movieapi.utils;
 
 import com.biraj.backbase.movie.movieapi.bean.AccessToken;
 import com.biraj.backbase.movie.movieapi.bean.AccessTokenPayload;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -14,16 +15,15 @@ import io.jsonwebtoken.JwtHandlerAdapter;
  * @author birajmishra
  */
 @Component
+@Slf4j
 public class JwtHandler extends JwtHandlerAdapter<AccessToken> {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(JwtHandler.class);
-	
+
 	protected static final String PARTY_ID = "ptyid";
 	
 	@Override
 	public AccessToken onClaimsJws(Jws<Claims> jws) {
-		if(LOG.isTraceEnabled()){
-			LOG.trace("AccessTokenJwtHandler : onClaimsJws : start ");
+		if(log.isTraceEnabled()){
+			log.trace("AccessTokenJwtHandler : onClaimsJws : start ");
 		}
 		AccessToken accessToken = new AccessToken();
 		accessToken.setHeaders(jws.getHeader());
@@ -35,8 +35,8 @@ public class JwtHandler extends JwtHandlerAdapter<AccessToken> {
 		payload.setOutletId((Integer)jws.getBody().get("outlet"));
 		
 		accessToken.setPayload(payload);
-		if(LOG.isTraceEnabled()){
-			LOG.trace("AccessTokenJwtHandler : onClaimsJws : accessToken : "+ accessToken);
+		if(log.isTraceEnabled()){
+			log.trace("AccessTokenJwtHandler : onClaimsJws : accessToken : "+ accessToken);
 		}
 		
 		return accessToken;
