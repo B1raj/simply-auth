@@ -23,6 +23,6 @@ public class Users {
 	private String userId;
 	private String password;
 
-	@OneToMany(mappedBy="userId")
-	private Set<Rating> items;
+	@OneToMany(mappedBy="user")
+	private Set<Rating> ratings;
 }

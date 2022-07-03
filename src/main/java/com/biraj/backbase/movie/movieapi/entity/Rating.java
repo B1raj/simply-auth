@@ -19,7 +19,7 @@ public class Rating implements Serializable {
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     @Id
-    private Users userId;
+    private Users user;
     @Id
     private String movie;
     private double rating;

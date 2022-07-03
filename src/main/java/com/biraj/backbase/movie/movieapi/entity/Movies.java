@@ -28,4 +28,6 @@ public class Movies {
 	private MovieKey movieKey;
 	private String category;
 
+	//@OneToMany(mappedBy="movie")
+	//private Set<Rating> ratings;
 }
