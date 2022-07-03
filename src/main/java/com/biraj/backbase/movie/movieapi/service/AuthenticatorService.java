@@ -42,7 +42,7 @@ public class AuthenticatorService {
 		String userid = decodedAuth.split(":")[0];
 		String password = decodedAuth.split(":")[1];
 
-		Optional<Users> userObject = userRepository.findByUserid(userid);
+		Optional<Users> userObject = userRepository.findByUserId(userid);
 
 		if(userObject.isEmpty()){
 			log.error("Authentication failed for provided {}", userid);
@@ -50,10 +50,10 @@ public class AuthenticatorService {
 					MovieConstant.UNABLE_TO_AUTHENTICATE);
 		}
 		Users user = userObject.get();
-		if (userid.equals(user.getUserid()) && password.equals(user.getPassword())) {
+		if (userid.equals(user.getUserId()) && password.equals(user.getPassword())) {
 			// valid user
 			if (log.isTraceEnabled()) log.trace("****LOGIN SUCCESSFUL **** for user{}", userid);
-			return AuthenticatorResponse.builder().authenticated(true).userInfo(UserInfo.builder().username(user.getUserid()).build()).build();
+			return AuthenticatorResponse.builder().authenticated(true).userInfo(UserInfo.builder().username(user.getUserId()).build()).build();
 
 		} else {
 			// invalid user
